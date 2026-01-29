@@ -1,0 +1,23 @@
+# FontForge Native Scripting Harness
+
+# 1. 检查是否有参数
+if ($argc < 2)
+  Print("Usage: fontforge -script fuzz.pe <fontfile>")
+  Quit(0)
+endif
+
+# 2. 尝试打开字体文件 (核心 Fuzz 点)
+# 这里的 open 动作会触发大量的 parsing 逻辑
+Open($1)
+
+# 3. 稍微遍历一下字形 (可选，增加覆盖率)
+# 有时候仅仅打开文件还不够，需要访问具体字形才会触发解码逻辑
+SelectAll()
+
+# 4. 尝试执行一些验证 (触发更多计算)
+# ValidationState 可能会触发深层逻辑
+# 0x4 = 检查丢失的 Extrema
+# Validate(0x4) 
+
+# 5. 安全退出
+Quit(0)
