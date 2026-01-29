@@ -1,0 +1,10 @@
+if ($argc < 2)
+  Print("Usage: fontforge -script fuzz.pe <fontfile>")
+  Quit(0)
+endif
+
+Open($1)
+
+SelectAll()
+
+Quit(0)
